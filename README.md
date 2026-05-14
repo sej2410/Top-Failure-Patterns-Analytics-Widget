@@ -41,6 +41,10 @@ npm install
 npm run seed
 ```
 
+> [!TIP]
+> **Don't want to set up a database?**
+> You can bypass the PostgreSQL requirement to quickly view the UI by adding `DEMO_MODE=true` to your `.env` file. This will safely intercept the database query and return hardcoded mock data so you can evaluate the frontend widget instantly.
+
 ### 2. Run the Backend API
 Start the Express server on port 4000:
 ```bash
