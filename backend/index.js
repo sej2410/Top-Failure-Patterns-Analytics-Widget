@@ -64,6 +64,17 @@ app.get('/api/analytics/top-failures/:customer_id', async (req, res) => {
     return res.status(400).json({ error: 'customer_id is required.' });
   }
 
+  if (process.env.DEMO_MODE === 'true') {
+    // ── DEMO MODE: Bypass DB for local viewing ──
+    const mockData = [
+      { failure_category: 'integration_error', ticket_count: 18 },
+      { failure_category: 'billing_confusion', ticket_count: 12 },
+      { failure_category: 'feature_misunderstanding', ticket_count: 7 }
+    ];
+    await new Promise(resolve => setTimeout(resolve, 400)); // Simulate network latency
+    return res.json({ customer_id, data: mockData });
+  }
+
   try {
     const result = await pool.query(TOP_FAILURES_QUERY, [customer_id]);
 
