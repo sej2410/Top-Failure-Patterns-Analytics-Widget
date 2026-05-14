@@ -60,8 +60,3 @@ npm run dev
 ```
 Navigate to `http://localhost:5173` to view the widget!
 
----
-
-## 🔍 Evaluation Criteria Notes
-* **SQL Optimization**: The query found in `backend/query.sql` processes everything efficiently. The `LIMIT 3` ensures the database stops calculating after finding the top groups, and the `WHERE` clauses handle `NULL` tags and boolean `false` checks cleanly at the database level.
-* **UI States**: The frontend uses a switch statement based on the API response to seamlessly transition between the `<LoadingSkeleton />`, `<PopulatedChart />`, and `<EmptyState />` components.
