@@ -1,0 +1,479 @@
+/* ============================================================
+   Global Design Tokens & Reset
+   ============================================================ */
+:root {
+  --color-bg:          #0d0f1a;
+  --color-surface:     #141726;
+  --color-surface-2:   #1c2035;
+  --color-border:      rgba(255, 255, 255, 0.07);
+  --color-text:        #f0f2ff;
+  --color-text-muted:  #8890b0;
+  --color-accent:      #6c63ff;
+  --color-accent-2:    #a78bfa;
+  --color-success:     #34d399;
+  --color-warning:     #fb923c;
+  --color-error:       #f87171;
+
+  /* Bar chart palette — each category gets one */
+  --bar-1: linear-gradient(90deg, #6c63ff, #a78bfa);
+  --bar-2: linear-gradient(90deg, #fb923c, #fbbf24);
+  --bar-3: linear-gradient(90deg, #34d399, #6ee7b7);
+
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+
+  --shadow-card: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.05);
+
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color-scheme: dark;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   App Shell
+   ============================================================ */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(108, 99, 255, 0.18), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 80%,  rgba(167, 139, 250, 0.12), transparent),
+    var(--color-bg);
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.app-header h1 {
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 700;
+  background: linear-gradient(135deg, #f0f2ff 30%, var(--color-accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+}
+
+.app-header p {
+  margin-top: 8px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+/* ============================================================
+   Widget Card
+   ============================================================ */
+.widget-card {
+  width: 100%;
+  max-width: 520px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+}
+
+.widget-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 22px 26px 18px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.widget-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+.widget-header-text h2 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: -0.2px;
+}
+
+.widget-header-text span {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.widget-badge {
+  margin-left: auto;
+  background: rgba(108, 99, 255, 0.15);
+  color: var(--color-accent-2);
+  border: 1px solid rgba(108, 99, 255, 0.3);
+  border-radius: 100px;
+  padding: 2px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.widget-body {
+  padding: 22px 26px 26px;
+}
+
+/* ============================================================
+   Loading Skeleton State
+   ============================================================ */
+.skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.skeleton-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.skeleton-label {
+  height: 13px;
+  border-radius: 4px;
+  background: var(--color-surface-2);
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.skeleton-count {
+  width: 32px;
+  height: 13px;
+  border-radius: 4px;
+  background: var(--color-surface-2);
+  flex-shrink: 0;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.skeleton-bar-track {
+  height: 8px;
+  border-radius: 100px;
+  background: var(--color-surface-2);
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { opacity: 0.4; }
+  50%  { opacity: 0.8; }
+  100% { opacity: 0.4; }
+}
+
+/* Stagger skeleton items */
+.skeleton-item:nth-child(1) .skeleton-label { width: 55%; animation-delay: 0s; }
+.skeleton-item:nth-child(2) .skeleton-label { width: 70%; animation-delay: 0.2s; }
+.skeleton-item:nth-child(3) .skeleton-label { width: 40%; animation-delay: 0.4s; }
+.skeleton-item:nth-child(1) .skeleton-bar-track { animation-delay: 0s; }
+.skeleton-item:nth-child(2) .skeleton-bar-track { animation-delay: 0.2s; }
+.skeleton-item:nth-child(3) .skeleton-bar-track { animation-delay: 0.4s; }
+
+.skeleton-footer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+}
+
+.skeleton-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-surface-2);
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+.skeleton-text-sm {
+  height: 11px;
+  width: 120px;
+  border-radius: 4px;
+  background: var(--color-surface-2);
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+/* ============================================================
+   Populated Data State — Bar Chart
+   ============================================================ */
+.failure-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.failure-item {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  animation: fadeSlideIn 0.4s ease both;
+}
+
+.failure-item:nth-child(1) { animation-delay: 0.05s; }
+.failure-item:nth-child(2) { animation-delay: 0.12s; }
+.failure-item:nth-child(3) { animation-delay: 0.19s; }
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.failure-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.failure-rank {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.failure-rank.rank-1 {
+  background: rgba(108, 99, 255, 0.2);
+  color: var(--color-accent-2);
+}
+.failure-rank.rank-2 {
+  background: rgba(251, 146, 60, 0.2);
+  color: #fb923c;
+}
+.failure-rank.rank-3 {
+  background: rgba(52, 211, 153, 0.2);
+  color: var(--color-success);
+}
+
+.failure-category-name {
+  flex: 1;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--color-text);
+  /* Convert snake_case to readable */
+  text-transform: capitalize;
+  letter-spacing: 0.1px;
+}
+
+.failure-count-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+
+.failure-count-badge.rank-1 {
+  background: rgba(108, 99, 255, 0.18);
+  color: var(--color-accent-2);
+}
+.failure-count-badge.rank-2 {
+  background: rgba(251, 146, 60, 0.18);
+  color: #fbbf24;
+}
+.failure-count-badge.rank-3 {
+  background: rgba(52, 211, 153, 0.18);
+  color: var(--color-success);
+}
+
+.bar-track {
+  height: 7px;
+  background: var(--color-surface-2);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  transition: width 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  width: 0; /* starts at 0, animated via inline style after mount */
+}
+
+.bar-fill.rank-1 { background: var(--bar-1); }
+.bar-fill.rank-2 { background: var(--bar-2); }
+.bar-fill.rank-3 { background: var(--bar-3); }
+
+/* ── Footer inside populated widget ── */
+.widget-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-error);
+  animation: pulse-dot 2s ease infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(248, 113, 113, 0.5); }
+  50%       { box-shadow: 0 0 0 5px rgba(248, 113, 113, 0); }
+}
+
+.widget-footer span {
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+}
+
+/* ============================================================
+   Empty State
+   ============================================================ */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 12px 0 8px;
+  gap: 14px;
+  animation: fadeSlideIn 0.4s ease both;
+}
+
+.empty-illustration {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(52, 211, 153, 0.15), rgba(52, 211, 153, 0.06));
+  border: 1.5px solid rgba(52, 211, 153, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+}
+
+.empty-state h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.empty-state p {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  max-width: 300px;
+  line-height: 1.6;
+}
+
+.empty-state-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 18px;
+  width: 100%;
+  border-top: 1px solid var(--color-border);
+  justify-content: center;
+}
+
+.status-dot-green {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-success);
+  animation: pulse-green 2s ease infinite;
+}
+
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5); }
+  50%       { box-shadow: 0 0 0 5px rgba(52, 211, 153, 0); }
+}
+
+.empty-state-footer span {
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+}
+
+/* ============================================================
+   State Switcher (demo buttons)
+   ============================================================ */
+.demo-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.demo-btn {
+  padding: 8px 18px;
+  border-radius: 100px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.demo-btn:hover {
+  background: var(--color-surface-2);
+  color: var(--color-text);
+  border-color: rgba(255,255,255,0.15);
+}
+
+.demo-btn.active {
+  background: rgba(108, 99, 255, 0.15);
+  border-color: rgba(108, 99, 255, 0.4);
+  color: var(--color-accent-2);
+}
+
+.demo-label {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
